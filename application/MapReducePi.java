@@ -33,7 +33,7 @@ public class MapReducePi implements MapReduce {
 				}
 			}
 			
-			double pi = 4*nbPointsDansCercle/nbPoints;
+			double pi = 4.0*nbPointsDansCercle/nbPoints;
 			writer.write(new KV(nbPoints.toString(),Double.toString(pi)));
 			
 		}
@@ -46,8 +46,9 @@ public class MapReducePi implements MapReduce {
 		Integer nombreResultats = 0;
 		double sommePi = 0;
 		while ((kv = reader.read()) != null) {
-			sommePi += Double.parseDouble(kv.v);
-			nombreResultats++;
+			double nb = Double.parseDouble(kv.k); // Le nombre de valeurs utilisées pour calculer ce "pi"
+			sommePi += nb * Double.parseDouble(kv.v);
+			nombreResultats += (int) nb;
 		}
 		
 		double moyenne = sommePi/nombreResultats;
@@ -60,7 +61,7 @@ public class MapReducePi implements MapReduce {
 
 		Job j = new Job();
 		j.setInputFormat(Format.Type.LINE);
-		j.setInputFname("a.txt");
+		j.setInputFname(args[0]);
 		long t1 = System.currentTimeMillis();
 		j.startJob(new MapReducePi());
 		long t2 = System.currentTimeMillis();
