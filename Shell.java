@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import application.MapReduceFreqLetter;
 import application.MapReduceIndiceCoincidence;
+import application.MapReduceKnuth;
 import application.MapReducePi;
 import application.MyMapReduce;
 import config.Project;
@@ -15,6 +16,8 @@ import hdfs.HdfsClient;
 import hdfs.ListesServeurs;
 import map.MapReduce;
 import ordo.Job;
+import ordo.JobInterfaceX;
+import ordo.JobX;
 
 
 public class Shell {
@@ -51,8 +54,13 @@ public class Shell {
 				hdfs5();
 				break;
 			case '6':
-				hidoop1();
+				hidoop(false);
 				break;	
+				
+			case '7':
+				hidoop(true);
+				break;	
+			
 			case 'q':
 				break;
 			default:
@@ -89,6 +97,7 @@ public class Shell {
 		System.out.println("4. HDFS: Afficher les fragments d'un fichier déjà enregistré");
 		System.out.println("5. HDFS: Afficher les fichiers déjà enregistrés");
 		System.out.println("6. Hidoop: Lancer un map-reduce");
+		System.out.println("7. Hidoop: Lancer un map-reduce avec reduce multiple");
 		System.out.println("h. Aide");
 		System.out.println("q. Quitter");
 		System.out.print("Votre choix : ");
@@ -187,18 +196,24 @@ public class Shell {
 	/**
 	 * Lancer un map reduce sur un fichier.
 	 */
-	private static void hidoop1() {
+	private static void hidoop(boolean avecReducerMultiple) {
 		System.out.println("Lancement d'une application map reduce sur un fichier");
 		System.out.print("Nom du fichier : ");
 		String nf = sc.nextLine();
-		System.out.println("Quelle appli? 1. WordCount 2. Calcul de Pi \n 3. Calcul de l'indice de coincidence 4. Calcul des fréquences des lettres");
+		System.out.println("Quelle appli? 1. WordCount 2. Calcul de Pi \n 3. Algorithme de Knuth \n 4. Page ranking \n 5. Calcul de l'indice de coincidence 6. Calcul des fréquences des lettres");
 		System.out.print("Choix : ");
 		int i = sc.nextInt();
-		Job j = new Job();
-		j.setInputFormat(Format.Type.KV);
-		j.setInputFname(nf);
-		j.setOutputFname(nf + "-resultat");
-		j.setOutputFormat(Format.Type.KV);
+		
+		JobInterfaceX job = null;
+		if(avecReducerMultiple)
+			job = new JobX();
+		else
+			job = new Job();
+
+		job.setInputFormat(Format.Type.KV);
+		job.setInputFname(nf);
+		job.setOutputFname(nf + "-resultat");
+		job.setOutputFormat(Format.Type.KV);
 
 		MapReduce mr = null;
 		switch(i){
@@ -210,17 +225,25 @@ public class Shell {
 			mr = new MapReducePi();
 			break;
 		case 3:
-			mr = new MapReduceFreqLetter();
+			mr = new MapReduceKnuth();
 			break;
 		case 4:
+			// PAGE RANKING A AJOUTER
+			mr = new MyMapReduce();
+			break;
+		case 5:
+			mr = new MapReduceFreqLetter();
+			break;
+		case 6:
 			mr = new MapReduceIndiceCoincidence();
 			break;
 		}
 		
 		long t1 = System.currentTimeMillis();
-		j.startJob(mr);
+		job.startJob(mr);
 		long t2 = System.currentTimeMillis();
 
 		System.out.println("time in ms =" + (t2 - t1));
 	}
+	
 }
