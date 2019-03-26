@@ -1,6 +1,5 @@
 package hdfs;
 
-import java.util.List;
 import java.util.Map;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
