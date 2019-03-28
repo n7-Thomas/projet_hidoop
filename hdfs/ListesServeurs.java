@@ -1,9 +1,15 @@
 package hdfs;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListesServeurs {
+public class ListesServeurs implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8768526012583861445L;
 	private List<String> main;
 	private List<String> backup;
 	
