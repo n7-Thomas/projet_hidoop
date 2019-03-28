@@ -37,7 +37,8 @@ public class DaemonReducer extends UnicastRemoteObject implements DaemonReducerI
 
 	@Override
 	public void runMapsAndReduce(MapReduce m, Map<Integer, String> serveurs, String inputFname, String outputFname,
-			Type inputFormat, Type outputFormat, Callback callbackJob) {
+			Type inputFormat, Type outputFormat, Callback callbackJob) throws RemoteException {
+		System.out.println("Réception d'une nouvelle tâche");
 		pool.execute(new TraiterRunMapReducer(m, serveurs, inputFname, outputFname, inputFormat, outputFormat, callbackJob));
 	}
 
@@ -51,12 +52,12 @@ public class DaemonReducer extends UnicastRemoteObject implements DaemonReducerI
 			// Création du registre, lancement du serveur
 			LocateRegistry.createRegistry(Project.PortDaemonReducer);
 			String url = "//localhost:" + Project.PortDaemonReducer + "/DaemonReducer";
-			Naming.rebind(url, new Daemon());
+			Naming.rebind(url, new DaemonReducer());
 
 			pool = Executors.newFixedThreadPool(Project.NombreOuvriersParDaemons);
 			
 			System.out.println("Lancement du Daemon Reducer sur le port : " + Project.PortDaemonReducer);
-			
+			System.out.println("En attente..");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			System.out.println("Erreur création du RMI (RemoteException), arrêt.");
@@ -84,12 +85,16 @@ class TraiterRunMapReducer implements Runnable {
 		this.serveurs = serveurs;
 		this.inputFname = inputFname;
 		this.outputFname = outputFname;
-		this.inputFormat = outputFormat;
+		this.inputFormat = inputFormat;
+		this.outputFormat = outputFormat;
 		this.callbackJob = callbackJob;
 	}
 
 	@Override
 	public void run() {
+		
+		System.out.println("Début du run");
+		
 		// Créer un callback
 		Callback cb = null;
 		try {

@@ -65,19 +65,22 @@ public class NameNode extends UnicastRemoteObject implements NameNodeInterface {
 	 * Enregistre un fichier dans l'annuaire.
 	 */
 	@Override
-	public void allouer(String nomFichier, int nombrePaquets) throws RemoteException {
+	public void allouer(String nomFichier, int nombrePaquets, boolean withSave) throws RemoteException {
 		System.out.println("Allocation de " + nombrePaquets + " pour le fichier " + nomFichier);
 		
 		List<String> nv = new ArrayList<String>();
-		List<String> backup = new ArrayList<String>();
+		List<String> backup = null;
+		if(withSave) backup = new ArrayList<String>();
 		
 		for (int i = 0; i < nombrePaquets; i++) {
 			nv.add(datanodes.get(i % datanodes.size()));
-			backup.add(datanodes.get((i + 1) % datanodes.size()));
+			if(withSave) backup.add(datanodes.get((i + 1) % datanodes.size()));
 		}
 		
-		ListesServeurs ls = new ListesServeurs();
-		ls.setBackup(backup);
+		ListesServeurs ls = new ListesServeurs(withSave);
+		
+		if(withSave) ls.setBackup(backup);
+		
 		ls.setMain(nv);
 		carte.put(nomFichier, ls);
 	}

@@ -12,10 +12,13 @@ public class ListesServeurs implements Serializable {
 	private static final long serialVersionUID = 8768526012583861445L;
 	private List<String> main;
 	private List<String> backup;
+	private boolean hasBackup;
 	
-	public ListesServeurs(){
+	public ListesServeurs(boolean withSave){
 		this.setMain(new ArrayList<String>());
-		this.setBackup(new ArrayList<String>());
+		if(withSave) this.setBackup(new ArrayList<String>());
+		else this.setBackup(null);
+		this.hasBackup = withSave;
 	}
 
 	public List<String> getMain() {
@@ -41,6 +44,14 @@ public class ListesServeurs implements Serializable {
 	
 	public String toString(){
 		return "Main : " + this.main.toString() + " / Backup : " + this.backup.toString();
+	}
+
+	public boolean hasBackup() {
+		return hasBackup;
+	}
+
+	public void setHasBackup(boolean hasBackup) {
+		this.hasBackup = hasBackup;
 	}
 	
 }

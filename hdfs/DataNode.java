@@ -312,7 +312,7 @@ public class DataNode extends Thread implements DataNodeInterface {
 	private KVFormat initReader(String nomFichier, String path, int identifiant, boolean lecture) {
 		KVFormat reader = new KVFormat();
 
-		int co = String.valueOf(identifiant).length() + 1;
+		int co = String.valueOf(identifiant).length();
 
 		String pathFichier = path.substring(0, path.length() - (nomFichier.length() + co));
 		String Fname = nomFichier.substring(0, nomFichier.length() - 4) + identifiant;

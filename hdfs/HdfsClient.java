@@ -202,7 +202,7 @@ public class HdfsClient {
 			Remote r = Naming.lookup(urlNameNode);
 			System.out.println("Requete vers NameNode au " + urlNameNode);
 			if (r instanceof NameNodeInterface) {
-				((NameNodeInterface) r).allouer(localFSSourceFname, nbPaquets);
+				((NameNodeInterface) r).allouer(localFSSourceFname, nbPaquets, withSave);
 				listeDataNode = ((NameNodeInterface) r).getlisteDataNode(localFSSourceFname);
 			}
 		} catch (Exception e) {

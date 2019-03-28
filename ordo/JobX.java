@@ -112,9 +112,9 @@ public class JobX implements JobInterfaceX {
 				Remote r = Naming.lookup(url);
 
 				if (r instanceof DaemonReducerInterface) {
-					System.out.println("RunMap..");
-					((DaemonReducerInterface) r).runMapsAndReduce(mr, listeTaches.get(i), this.inputFname,
-							this.outputFname, inputFormat, outputFormat, callbackFinReduce);
+					System.out.println("Envoi aux serveurs reducer..");
+					((DaemonReducerInterface) r).runMapsAndReduce(mr, listeTaches.get(i), this.inputFname,this.outputFname, this.inputFormat, this.outputFormat, callbackFinReduce);
+					System.out.println("Envoyé " + i + ".");
 				} else {
 					throw new ErreurLancementRunMapException("Erreur lors de l'envoi de l'ordre au DaemonReducer");
 				}

@@ -24,11 +24,11 @@ public class Project {
 	
 	
 	// Informations du NameNode
-	public static final String AdresseNameNode = "acdc";
+	public static final String AdresseNameNode = "zztop";
 	public static final int PortNameNode = 8081;
 	
 	// Informations des DataNodes
-	public static final String[] nomMachinesDataNodes = {"arryn", "vador", "chewie"}; // {"yoda", "zztop", "chewie",  "dagobah", "ewok", "portreal", "tully","stark", "arryn", "dorne"};
+	public static final String[] nomMachinesDataNodes = {"acdc", "roucool", "pikachu"}; // {"yoda", "zztop", "chewie",  "dagobah", "ewok", "portreal", "tully","stark", "arryn", "dorne"};
 	//public static final String[] nomMachinesDataNodes = {"localhost", "localhost"};
 	public static final int PortDataNode = 8082;
 	
@@ -51,7 +51,7 @@ public class Project {
 
 
 	
-	public static final String[] nomMachineDaemonReducer = {"pikachu"};
+	public static final String[] nomMachineDaemonReducer = {"azote"};
 	public static final int PortDaemonReducer = 8085;
 
 	

@@ -118,13 +118,13 @@ public class Shell {
 		else // En cas de mauvaise rentrée on suppose que c'est une Line
 			ft = Type.LINE;
 
-		System.out.print("Nombre de replicas (A implémenter, pour l'instant 1): ");
-		/*int repF = */sc.nextInt();
-		
+		System.out.print("Avec backup y/n: ");
+		boolean withBackup = sc.nextLine().contains("y");
+		System.out.println(withBackup);
 		try {
-			HdfsClient.HdfsWrite(ft, nf, false);
+			HdfsClient.HdfsWrite(ft, nf, withBackup);
 		} catch (ErreurEnvoiInformationsServeurException | IOException e) {
-			System.out.println("Une erreur a été levé, veuillez réessayer (nom du fichier pas bon?) ");
+			System.out.println("Une erreur a été levée, veuillez réessayer (nom du fichier pas bon?) ");
 		}
 
 	}
@@ -200,7 +200,7 @@ public class Shell {
 		System.out.println("Lancement d'une application map reduce sur un fichier");
 		System.out.print("Nom du fichier : ");
 		String nf = sc.nextLine();
-		System.out.println("Quelle appli? 1. WordCount 2. Calcul de Pi \n 3. Algorithme de Knuth \n 4. Page ranking \n 5. Calcul de l'indice de coincidence 6. Calcul des fréquences des lettres");
+		System.out.println("Quelle appli? \n 1. WordCount \n 2. Calcul de Pi \n 3. Algorithme de Knuth \n 4. Page ranking \n 5. Calcul de l'indice de coincidence \n 6. Calcul des fréquences des lettres");
 		System.out.print("Choix : ");
 		int i = sc.nextInt();
 		

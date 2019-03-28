@@ -23,7 +23,7 @@ public interface NameNodeInterface extends Remote{
 	/**
 	 * Allouer un nouveau fichier.
 	 */
-	void allouer(String nomFichier, int nombrePaquets) throws RemoteException;
+	void allouer(String nomFichier, int nombrePaquets, boolean withSave) throws RemoteException;
 	
 	/**
 	 * Renvoyer les datanodes.
