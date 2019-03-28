@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import config.Project;
 import exceptions.ErreurEnvoiInformationsServeurException;
+import exceptions.ErreurFermetureStreamException;
 import exceptions.ErreurRecuperationNameNodeException;
 import formats.Format;
 import formats.Format.OpenMode;

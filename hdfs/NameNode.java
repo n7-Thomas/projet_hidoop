@@ -67,12 +67,15 @@ public class NameNode extends UnicastRemoteObject implements NameNodeInterface {
 	@Override
 	public void allouer(String nomFichier, int nombrePaquets) throws RemoteException {
 		System.out.println("Allocation de " + nombrePaquets + " pour le fichier " + nomFichier);
+		
 		List<String> nv = new ArrayList<String>();
 		List<String> backup = new ArrayList<String>();
+		
 		for (int i = 0; i < nombrePaquets; i++) {
 			nv.add(datanodes.get(i % datanodes.size()));
 			backup.add(datanodes.get((i + 1) % datanodes.size()));
 		}
+		
 		ListesServeurs ls = new ListesServeurs();
 		ls.setBackup(backup);
 		ls.setMain(nv);

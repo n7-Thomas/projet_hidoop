@@ -26,7 +26,7 @@ public class Shell {
 
 	
 	/**
-	 * Lance un petit Shell pour pouvoir naviger sur les services.
+	 * Lance un Shell pour pouvoir naviger sur les services.
 	 * @param args
 	 */
 	public static void main(String[] args) {

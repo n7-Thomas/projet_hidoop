@@ -1,4 +1,4 @@
-package hdfs;
+package exceptions;
 
 /**
  * Erreur intervenant lors de la fermeture de stream.
