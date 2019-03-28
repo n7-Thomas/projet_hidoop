@@ -206,6 +206,7 @@ public class HdfsClient {
 				listeDataNode = ((NameNodeInterface) r).getlisteDataNode(localFSSourceFname);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out
 					.println("Erreur de connexion au NameNode, vérifiez que le Namenode est lancé sur " + urlNameNode);
 			return;

@@ -47,7 +47,7 @@ public class Project {
 	public static final int NombreKVMax = 3000000;
 	
 	// Nombre de serveurs qui sont utilisés parmis la liste plus haut
-	public static final int NombreServeursUtiles = 1;
+	public static final int NombreServeursUtiles = 3;
 
 
 	
