@@ -113,6 +113,7 @@ public class JobX implements JobInterfaceX {
 
 				if (r instanceof DaemonReducerInterface) {
 					System.out.println("Envoi aux serveurs reducer..");
+					//System.out.println(mr + "\n" + listeTaches.get(i) + "\n" +this.inputFname + "\n" + this.outputFname + "\n" + this.inputFormat + "\n" + this.outputFormat + "\n" + callbackFinReduce);
 					((DaemonReducerInterface) r).runMapsAndReduce(mr, listeTaches.get(i), this.inputFname,this.outputFname, this.inputFormat, this.outputFormat, callbackFinReduce);
 					System.out.println("Envoyé " + i + ".");
 				} else {
@@ -136,15 +137,14 @@ public class JobX implements JobInterfaceX {
 		}
 
 		// Récupérer les fichiers déjà reduce 1 fois
-
 		// Récupération des fichiers intermédiaires
 		System.out.println("Lancement Read Inter sur DeamonReducer : " + inputFname);
-		HdfsClient.HdfsReadIntermediaires(inputFname, inputFname + "-resultat");
+		HdfsClient.HdfsReadIntermediaires(inputFname, inputFname + "-resultat_partiel");
 
 		// Création des FormatReader/Writer pour le reduce
 		Format readerReduce = new KVFormat();
 		readerReduce.setPath(Project.PATH + Project.PATH_FILES);
-		readerReduce.setFname(inputFname + "-prereducefinal");
+		readerReduce.setFname(inputFname + "-resultat_partiel");
 		readerReduce.open(OpenMode.R);
 
 		Format writerReduce = null;
@@ -156,7 +156,7 @@ public class JobX implements JobInterfaceX {
 		writerReduce.setPath(Project.PATH + Project.PATH_FILES);
 
 		if (this.outputFname == null)
-			writerReduce.setFname(inputFname + "-resultatfinal");
+			writerReduce.setFname(inputFname + "-resultat_final");
 		else
 			writerReduce.setFname(outputFname);
 

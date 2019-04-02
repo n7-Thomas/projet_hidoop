@@ -24,11 +24,11 @@ public class Project {
 	
 	
 	// Informations du NameNode
-	public static final String AdresseNameNode = "zztop";
+	public static final String AdresseNameNode = "magicarpe";
 	public static final int PortNameNode = 8081;
 	
 	// Informations des DataNodes
-	public static final String[] nomMachinesDataNodes = {"acdc", "roucool", "pikachu"}; // {"yoda", "zztop", "chewie",  "dagobah", "ewok", "portreal", "tully","stark", "arryn", "dorne"};
+	public static final String[] nomMachinesDataNodes = {"zztop","portreal", "tully", "arryn", "dorne", "carpe", "salameche", "rattata", "roucool", "pikachu" };
 	//public static final String[] nomMachinesDataNodes = {"localhost", "localhost"};
 	public static final int PortDataNode = 8082;
 	
@@ -40,18 +40,18 @@ public class Project {
 
 	// Informations du Callback
 	public static final int PortCallback = 8084;
-	public static final String AdresseCallback = "leia";
+	public static final String AdresseCallback = "magicarpe";
 
 
 	// Nombre maximum de KVMax enregistré dans un fichier.
-	public static final int NombreKVMax = 3000000;
+	public static final int NombreKVMax = 4000000;
 	
 	// Nombre de serveurs qui sont utilisés parmis la liste plus haut
-	public static final int NombreServeursUtiles = 3;
+	public static final int NombreServeursUtiles = 10;
 
 
 	
-	public static final String[] nomMachineDaemonReducer = {"azote"};
+	public static final String[] nomMachineDaemonReducer = {"taupiqueur", "melofee"};
 	public static final int PortDaemonReducer = 8085;
 
 	

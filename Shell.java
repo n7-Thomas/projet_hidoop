@@ -120,7 +120,7 @@ public class Shell {
 
 		System.out.print("Avec backup y/n: ");
 		boolean withBackup = sc.nextLine().contains("y");
-		System.out.println(withBackup);
+		//System.out.println(withBackup);
 		try {
 			HdfsClient.HdfsWrite(ft, nf, withBackup);
 		} catch (ErreurEnvoiInformationsServeurException | IOException e) {
@@ -212,7 +212,7 @@ public class Shell {
 
 		job.setInputFormat(Format.Type.KV);
 		job.setInputFname(nf);
-		job.setOutputFname(nf + "-resultat");
+		job.setOutputFname(nf + "-resultat_final");
 		job.setOutputFormat(Format.Type.KV);
 
 		MapReduce mr = null;

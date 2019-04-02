@@ -37,9 +37,12 @@ public class DaemonReducer extends UnicastRemoteObject implements DaemonReducerI
 
 	@Override
 	public void runMapsAndReduce(MapReduce m, Map<Integer, String> serveurs, String inputFname, String outputFname,
-			Type inputFormat, Type outputFormat, Callback callbackJob) throws RemoteException {
+			Type inputFormat, Type outputFormat, CallbackInterface callbackJob) throws RemoteException {
 		System.out.println("Réception d'une nouvelle tâche");
-		pool.execute(new TraiterRunMapReducer(m, serveurs, inputFname, outputFname, inputFormat, outputFormat, callbackJob));
+		if(!serveurs.isEmpty())
+			pool.execute(new TraiterRunMapReducer(m, serveurs, inputFname, outputFname, inputFormat, outputFormat, callbackJob));
+		else
+			System.out.println("Aucune tâche!");
 	}
 
 	/**
@@ -76,10 +79,10 @@ class TraiterRunMapReducer implements Runnable {
 	private String outputFname;
 	private Type inputFormat;
 	private Type outputFormat;
-	private Callback callbackJob;
+	private CallbackInterface callbackJob;
 
 	public TraiterRunMapReducer(MapReduce m, Map<Integer, String> serveurs, String inputFname, String outputFname,
-			Type inputFormat, Type outputFormat, Callback callbackJob) {
+			Type inputFormat, Type outputFormat, CallbackInterface callbackJob) {
 
 		this.m = m;
 		this.serveurs = serveurs;
@@ -178,10 +181,10 @@ class TraiterRunMapReducer implements Runnable {
 		else
 			writerReduce = new LineFormat();
 
-		writerReduce.setPath(Project.PATH + Project.PATH_FILES);
+		writerReduce.setPath("/work/");
 
 		if (outputFname == null)
-			writerReduce.setFname(inputFname + "-resultat");
+			writerReduce.setFname(inputFname + "-resultat_partiel");
 		else
 			writerReduce.setFname(outputFname);
 

@@ -39,11 +39,16 @@ public class ListesServeurs implements Serializable {
 	
 	// ON ENREGISTRE LE FRAGMENT AU i + 1 serveur
 	public String getSavedFragment(int i) {
-		return this.backup.get((i + 1)%this.backup.size());
+		if(this.backup != null)
+			return this.backup.get((i + 1)%this.backup.size());
+		else
+			return null;
 	}
 	
 	public String toString(){
-		return "Main : " + this.main.toString() + " / Backup : " + this.backup.toString();
+		String res = "Main : " + this.main.toString();
+		if(this.backup != null) res += " / Backup : " + this.backup.toString();
+		return res;
 	}
 
 	public boolean hasBackup() {

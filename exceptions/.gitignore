@@ -1,0 +1,11 @@
+/ErreurEcritureFichierException.class
+/ErreurEnregistrementException.class
+/ErreurEnvoiInformationsServeurException.class
+/ErreurFermetureStreamException.class
+/ErreurLancementRunMapException.class
+/ErreurLectureFichierException.class
+/ErreurOuvertureFichierException.class
+/ErreurRecuperationFragmentException.class
+/ErreurRecuperationNameNodeException.class
+/ErreurSuppressionFragmentException.class
+/NomDeFichierInconnuException.class

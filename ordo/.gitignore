@@ -1,0 +1,13 @@
+/Callback.class
+/CallbackInterface.class
+/Daemon.class
+/DaemonInterface.class
+/DaemonReducer.class
+/DaemonReducerInterface.class
+/Job.class
+/JobInterface.class
+/JobInterfaceX.class
+/JobX.class
+/SortComparator.class
+/TraiterRunMap.class
+/TraiterRunMapReducer.class

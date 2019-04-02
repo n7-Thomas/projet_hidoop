@@ -212,16 +212,11 @@ public class HdfsClient {
 			return;
 		}
 
-		System.out.println("Préparation de l'envoi de " + nbPaquets + " paquets.");
 		envoiVersServeur(nbPaquets, listeDataNode.getMain(), localFSSourceFname, reader);
 		
 		if(withSave){
 			envoiVersServeur(nbPaquets, listeDataNode.getBackup(), localFSSourceFname, reader);
 		}
-		
-		
-		
-		
 		
 		System.out.println("Fichier " + localFSSourceFname + " enregistré avec succès.");
 	}
@@ -321,7 +316,7 @@ public class HdfsClient {
 	}
 
 	public static void HdfsReadIntermediaires(String hdfsFname, String localFSDestFname) {
-		System.out.println("Récupération des fichiers intermédiaires" + hdfsFname);
+		System.out.println("Récupération des fichiers intermédiaires " + hdfsFname);
 		HdfsClient.recuperation(hdfsFname, localFSDestFname, false);
 	}
 
@@ -352,7 +347,7 @@ public class HdfsClient {
 			return;
 		}
 
-		// Préparation du writer qui va enregistrer dans data/ le fichier
+		// Préparation du writer qui va enregistrer dans nosave/ le fichier
 		// récupéré
 		Format writer = new KVFormat();
 		writer.setPath(Project.PATH + Project.PATH_FILES);
